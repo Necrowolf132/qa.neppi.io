@@ -1,0 +1,162 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transacciones_pagomovil_confirmaciones",
+  "info": {
+    "name": "transacciones pago movil confirmaciones"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nro_referencia_pagomovil": {
+      "type": "biginteger",
+      "required": true
+    },
+    "ip": {
+      "type": "string",
+      "required": true
+    },
+    "nro_telefono_pagomovil_emisor": {
+      "type": "biginteger",
+      "required": true
+    },
+    "nro_telefono_pagomovil_receptor": {
+      "type": "biginteger",
+      "required": true
+    },
+    "id_firma_pagomovil_confirmacion": {
+      "type": "biginteger",
+      "required": true
+    },
+    "documento_identidad_pagomovil_emisor": {
+      "type": "string",
+      "required": true
+    },
+    "documento_identidad_pagomovil_receptor": {
+      "type": "string",
+      "required": true
+    },
+    "tasa_de_cambio_bs_por_dolar_transaccion": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "procesado",
+        "reversado",
+        "no_procesado",
+        "error"
+      ]
+    },
+    "tipo_operacion_pagomovil_confirmacion": {
+      "type": "enumeration",
+      "enum": [
+        "simple",
+        "multible"
+      ]
+    },
+    "moneda_principal_transaccion": {
+      "type": "enumeration",
+      "enum": [
+        "BS",
+        "USD"  
+      ]
+    },
+    "monto_pagomovil_transaccion_usd": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "monto_pagomovil_transaccion_bs": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "banco_pagomovil_emisor": {
+      "type": "string",
+      "required": true
+    },
+    "banco_pagomovil_receptor": {
+      "type": "string",
+      "required": true
+    },
+    "fecha_realizacion_operacion": {
+      "type": "datetime",
+      "required": true,
+      "default": "0000-06-21T04:27:44.000Z"
+    },
+    "fecha_confirmacion_operacion": {
+      "type": "datetime"
+    },    
+    "id_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "required": true
+    },
+    "id_terminal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.terminales",
+      "campoInstanciaAsociada": [{"campo":"id_user", "campoTable":"id_user", "is_required":true},
+        {"campo":"id_producto_tipo", "campoTable":"id_producto_tipo", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir terminal asociado",
+      "customMainField": { "name": "nombre_del_terminal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_del_terminal",
+      "customTargetModel": "application::asociados-a-comercio.terminales",
+      "required": true
+    },
+    "id_sucursal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.sucursales",
+      "campoInstanciaAsociada": [{"campo":"id_user", "campoTable":"id_user", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir sucursal asociada",
+      "customMainField": { "name": "nombre_de_la_sucursal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_de_la_sucursal",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "id_producto_tipo": {
+      "model": "productos"
+    },
+    "id_comercio": {
+      "model": "comercio"
+    },
+    "monto_comision": {
+      "type": "decimal",
+      "private": false,
+      "max": 100
+    },
+    "tipo_comision": {
+      "type": "enumeration",
+      "enum": [
+        "porcentual",
+        "monto_fijo"
+      ]
+    }, 
+    "codigo_de_api": {
+      "type": "string"
+    },
+    "mensaje_de_api": {
+      "type": "text"
+    },
+    "documento_identidad_comercio_asociado": {
+      "type": "string",
+      "required": true,
+      "regex": "^$|^[VvJjEeGg][0-9]{11,11}$"
+    },
+    "pagos_moviles_asociados_transaccion": {
+      "type": "component",
+      "repeatable": true,
+      "component": "transacciones-pagomovil-confirmaciones.transacciones-pagomovil-confirmaciones-multiples-pagos"
+    }
+  }
+}

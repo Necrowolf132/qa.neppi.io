@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/generateToken",
+      "handler": "token-generator.index",
+      "config": {
+        "policies": ["tokenAccess"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_"},{"v":2,"unique":true,"key":{"Codigo_de_producto":1},"name":"Codigo_de_producto_1","partialFilterExpression":{"Codigo_de_producto":{"$type":"string"}},"background":true}],"uuid":"7a3e29fbfed0480ca72345cc570ae52a"}

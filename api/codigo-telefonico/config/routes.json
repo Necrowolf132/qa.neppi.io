@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/codigo-telefonicos",
+      "handler": "codigo-telefonico.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codigo-telefonicos/count",
+      "handler": "codigo-telefonico.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codigo-telefonicos/:id",
+      "handler": "codigo-telefonico.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/codigo-telefonicos",
+      "handler": "codigo-telefonico.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/codigo-telefonicos/:id",
+      "handler": "codigo-telefonico.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/codigo-telefonicos/:id",
+      "handler": "codigo-telefonico.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

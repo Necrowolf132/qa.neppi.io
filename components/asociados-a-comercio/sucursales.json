@@ -1,0 +1,51 @@
+{
+  "collectionName": "Sucursales_componet",
+  "info": {
+    "name": "Sucursales",
+    "icon": "clinic-medical",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "nombre_de_la_sucursal": {
+      "type": "string"
+    },
+    "descripcion_de_la_sucursal": {
+      "type": "text"
+    },
+    "tipo_de_sucursal": {
+      "type": "enumeration",
+      "enum": [
+        "fisica",
+        "digital"
+      ]
+    },
+    "direccion": {
+      "type": "text"
+    },
+    "id_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "id_comercio": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "comercio",
+      "campoInstanciaAsociada": [{"campo":"id_user", "campoTable":"id_usuario", "is_componet":"sucursales", "is_required":true },{"campo":"id", "campoTable":"id", "is_required":true}],
+      "placeholder":"añadir comercio asociada",
+      "customMainField": { "name": "razon_social", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "razon_social",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo",
+        "bloqueado"
+      ]
+    }
+  }
+}

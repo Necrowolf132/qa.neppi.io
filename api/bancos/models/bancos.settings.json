@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bancos",
+  "info": {
+    "name": "bancos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "string"
+    },
+    "codigo_banco": {
+      "type": "enumeration",
+      "enum": [
+        "_0156_",
+        "_0196_",
+        "_0172_",
+        "_0171_",
+        "_0166_",
+        "_0175_",
+        "_0128_",
+        "_0164_",
+        "_0102_",
+        "_0114_",
+        "_0149_",
+        "_0163_",
+        "_0176_",
+        "_0115_",
+        "_0003_",
+        "_0173_",
+        "_0105_",
+        "_0191_",
+        "_0116_",
+        "_0138_",
+        "_0108_",
+        "_0104_",
+        "_0168_",
+        "_0134_",
+        "_0177_",
+        "_0146_",
+        "_0174_",
+        "_0190_",
+        "_0121_",
+        "_0157_",
+        "_0151_",
+        "_0601_",
+        "_0169_",
+        "_0137_"
+      ]
+    },
+    "pais_id": {
+      "model": "paises"
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo"
+      ]
+    },
+    "banco_aliado": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

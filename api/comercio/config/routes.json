@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/comercios",
+      "handler": "comercio.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/comercios/count",
+      "handler": "comercio.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/comercios/getComercioFromToken",
+      "handler": "comercio.getComercioFromToken",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/comercios/generateConcentID",
+      "handler": "comercio.generateConcentID",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/comercios/:id",
+      "handler": "comercio.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/comercios",
+      "handler": "comercio.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/comercios/:id",
+      "handler": "comercio.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/comercios/:id",
+      "handler": "comercio.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

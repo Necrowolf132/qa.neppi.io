@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "productos",
+  "info": {
+    "name": "productos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "default": "Desinfección",
+      "required": true
+    },
+    "descripcion": {
+      "type": "richtext"
+    },
+    "Codigo_de_producto": {
+      "type": "uid",
+      "targetField": "nombre"
+    },
+    "tasa_de_comision": {
+      "model": "tasa-de-comisiones"
+    }
+  }
+}

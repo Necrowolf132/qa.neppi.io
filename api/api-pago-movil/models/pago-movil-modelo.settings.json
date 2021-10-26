@@ -1,0 +1,32 @@
+{
+    "kind": "collectionType",
+    "connection": "default",
+    "collectionName": "pago_movil_modelo",
+    "globalId": "ModeloPagoMovil",
+    "info": {
+        "name": "Modelo Api Pago movil",
+        "description": "La Super descripcion que se me ocurrio"
+      },
+    "options": {
+        "timestamps": true,
+        "populateCreatorFields": true,
+        "increments": true
+      },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "min": 3,
+            "max": 99,
+            "unique": true
+          },
+          "contenido": {
+
+            "type": "text"
+
+          },
+          "slug": {
+            "type": "uid",
+            "targetField": "title"
+          }
+    }
+}

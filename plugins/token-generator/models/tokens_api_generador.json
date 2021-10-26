@@ -1,0 +1,44 @@
+{
+  "collectionName": "tokens_api_generador",
+  "info": {
+    "name": "Tabla de tokens",
+    "description": ""
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "token_generado": {
+      "type": "string",
+      "configurable": false
+    },
+    "estatus_de_token": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo",
+        "bloqueado"
+      ],
+      "configurable": false
+    },  
+    "id_producto_tipo": {
+        "model": "productos",
+        "configurable": false
+    },
+    "id_usuario": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "configurable": false
+    }
+  }
+}

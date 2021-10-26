@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codigo_telefonicos",
+  "info": {
+    "name": "codigo_telefonico",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "codigo": {
+      "type": "string",
+      "regex": "^[0-9]*$"
+    },
+    "nombre_o_region": {
+      "type": "string"
+    },
+    "paises": {
+      "model": "paises"
+    }
+  }
+}

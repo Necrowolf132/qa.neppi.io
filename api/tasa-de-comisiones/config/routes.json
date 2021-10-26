@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/tasa-de-comisiones",
+      "handler": "tasa-de-comisiones.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tasa-de-comisiones/count",
+      "handler": "tasa-de-comisiones.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tasa-de-comisiones/:id",
+      "handler": "tasa-de-comisiones.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/tasa-de-comisiones",
+      "handler": "tasa-de-comisiones.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/tasa-de-comisiones/:id",
+      "handler": "tasa-de-comisiones.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/tasa-de-comisiones/:id",
+      "handler": "tasa-de-comisiones.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "routes": [
+   
+    {
+      "method": "POST",
+      "path": "/token/generate",
+      "handler": "token.generateToken",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

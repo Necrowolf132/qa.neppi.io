@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "colecciondeprueba2s",
+  "info": {
+    "name": "colecciondeprueba2"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "texto1": {
+      "type": "string"
+    },
+    "texto2": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movil-p2ps/generateSinglePago",
+      "handler": "operaciones-pago-movil-p2p.generateSinglePago",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-p2ps/getBancosValidos",
+      "handler": "operaciones-pago-movil-p2p.getBancosValidos",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-p2ps",
+      "handler": "operaciones-pago-movil-p2p.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-p2ps/count",
+      "handler": "operaciones-pago-movil-p2p.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-p2ps/:id",
+      "handler": "operaciones-pago-movil-p2p.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movil-p2ps",
+      "handler": "operaciones-pago-movil-p2p.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/operaciones-pago-movil-p2ps/:id",
+      "handler": "operaciones-pago-movil-p2p.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/operaciones-pago-movil-p2ps/:id",
+      "handler": "operaciones-pago-movil-p2p.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

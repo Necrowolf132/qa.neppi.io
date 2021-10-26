@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modulos_menus",
+  "info": {
+    "name": "módulo menús",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre_del_modulo": {
+      "type": "string"
+    },
+    "nombre_del_controlador": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string",
+      "regex": "^$|^\\/(([A-z0-9\\-\\%]+\\/)*[A-z0-9\\-\\%]+$)?"
+    },
+    "icono": {
+      "type": "string"
+    },
+    "nombre_interno_del_menu": {
+      "type": "string"
+    },
+    "permiso_del_menu": {
+      "type": "enumeration",
+      "enum": [
+        "lectura",
+        "lectura_escritura",
+        "lectura_escritura_creacion",
+        "escritura",
+        "escritura_creacion",
+        "creacion",
+        "creacion_lectura"
+      ]
+    }
+  }
+}

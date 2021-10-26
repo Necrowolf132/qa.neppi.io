@@ -1,0 +1,1 @@
+module.exports = {settings: {public: {enabled: false}, public2: {enabled: true}}}

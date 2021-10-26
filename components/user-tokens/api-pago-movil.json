@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_user_tokens_api_pago_movils",
+  "info": {
+    "name": "API_pago_movil",
+    "icon": "lock"
+  },
+  "options": {},
+  "attributes": {
+    "generateToken": {
+      "type": "token",
+      "columnType": "string",
+      "targetField": "TokenPagoMovil",
+      "targetFieldArray" : ["email", "username"],
+      "required": true
+    }
+  }
+  
+}

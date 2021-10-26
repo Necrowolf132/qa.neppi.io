@@ -1,0 +1,130 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contactenos",
+  "info": {
+    "name": "contactenos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "minLength": 3
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "telefono": {
+      "type": "biginteger",
+      "required": true,
+      "min": "0"
+    },
+    "persona": {
+      "type": "enumeration",
+      "enum": [
+        "Juridica",
+        "Natural",
+        "Gobierno",
+        "Otra"
+      ],
+      "default": "Juridica",
+      "required": true
+    },
+    "mensaje": {
+      "type": "text",
+      "required": true
+    },
+    "asunto": {
+      "type": "string",
+      "default": "Información del Servicio",
+      "required": true
+    },
+    "procedencia": {
+      "type": "enumeration",
+      "enum": [
+        "Sitio_Web_Formulario_Lead",
+        "Sitio_Web_Formulario_Contactenos",
+        "Ecommerce",
+        "Telefono",
+        "Whatsapp",
+        "Instagram",
+        "Facebook"
+      ],
+      "required": true,
+      "default": "Sitio_Web_Formulario_Contactenos"
+    },
+    "agente": {
+      "type": "enumeration",
+      "enum": [
+        "Daniel",
+        "Jose",
+        "Mari",
+        "Jese",
+        "Web",
+        "Ecommerce",
+        "Otro"
+      ],
+      "default": "Web",
+      "required": true
+    },
+    "fecha": {
+      "type": "datetime",
+      "required": true
+    },
+    "productos": {
+      "columnName": "id_productos",
+      "collection": "productos"
+    },
+    "observaciones": {
+      "type": "text"
+    },
+    "cliente": {
+      "type": "enumeration",
+      "enum": [
+        "Lead",
+        "Cliente"
+      ],
+      "default": "Lead"
+    },
+    "contactado": {
+      "type": "enumeration",
+      "enum": [
+        "Sin_Contactar",
+        "Llamada",
+        "Whatsapp",
+        "Facebook",
+        "Instagram",
+        "Email",
+        "Otro"
+      ],
+      "default": "Sin_Contactar"
+    },
+    "propuesta": {
+      "type": "enumeration",
+      "enum": [
+        "Propuesta_No_Enviada",
+        "Propuesta_Enviada",
+        "Propuesta_Aceptada",
+        "Propuesta_No_Aceptada",
+        "Cliente_Convertido",
+        "Cliente_No_Concretado"
+      ],
+      "default": "Propuesta_No_Enviada"
+    },
+    "proyecto": {
+      "type": "enumeration",
+      "enum": [
+        "Apipago",
+        "Otros"
+      ],
+      "default": "Apipago"
+    }
+  }
+}

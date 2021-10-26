@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movil-c2ps/generateSinglePago",
+      "handler": "operaciones-pago-movil-c2p.generateSinglePago",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-c2ps/generateTokenBancoPlaza",
+      "handler": "operaciones-pago-movil-c2p.generateTokenBancoPlaza",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-c2ps/getBancosValidos",
+      "handler": "operaciones-pago-movil-c2p.getBancosValidos",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-c2ps",
+      "handler": "operaciones-pago-movil-c2p.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-c2ps/count",
+      "handler": "operaciones-pago-movil-c2p.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-c2ps/:id",
+      "handler": "operaciones-pago-movil-c2p.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movil-c2ps",
+      "handler": "operaciones-pago-movil-c2p.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/operaciones-pago-movil-c2ps/:id",
+      "handler": "operaciones-pago-movil-c2p.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/operaciones-pago-movil-c2ps/:id",
+      "handler": "operaciones-pago-movil-c2p.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

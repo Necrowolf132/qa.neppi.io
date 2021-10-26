@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modelo_de_pruebas",
+  "info": {
+    "name": "modelo de prueba",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "enlaces": {
+      "type": "string"
+    },
+    "EmailUsuario": {
+      "type": "email"
+    },
+    "arregloVariable": {
+      "type": "json"
+    },
+    "clave": {
+      "type": "password"
+    },
+    "productos": {
+      "collection": "productos"
+    },
+    "permiso_de_creacion": {
+      "type": "boolean",
+      "default": false
+    },
+    "fecha_solo_fecha": {
+      "type": "date"
+    }
+  }
+}

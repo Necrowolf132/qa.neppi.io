@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/colecciondeprueba-2-s",
+      "handler": "colecciondeprueba2.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/colecciondeprueba-2-s/count",
+      "handler": "colecciondeprueba2.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/colecciondeprueba-2-s/:id",
+      "handler": "colecciondeprueba2.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/colecciondeprueba-2-s",
+      "handler": "colecciondeprueba2.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/colecciondeprueba-2-s/:id",
+      "handler": "colecciondeprueba2.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/colecciondeprueba-2-s/:id",
+      "handler": "colecciondeprueba2.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api-pago-movil",
+      "handler": "api-pago-movil.agregado",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

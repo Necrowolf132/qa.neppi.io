@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/registro-de-transacciones",
+      "handler": "registro-de-transacciones.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/registro-de-transacciones/count",
+      "handler": "registro-de-transacciones.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/registro-de-transacciones/:id",
+      "handler": "registro-de-transacciones.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/registro-de-transacciones",
+      "handler": "registro-de-transacciones.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/registro-de-transacciones/:id",
+      "handler": "registro-de-transacciones.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/registro-de-transacciones/:id",
+      "handler": "registro-de-transacciones.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

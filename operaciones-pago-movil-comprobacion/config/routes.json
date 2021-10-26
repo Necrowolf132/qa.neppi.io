@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movil-comprobacions/generarComprobacion",
+      "handler": "operaciones-pago-movil-comprobacion.generarComprobacion",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-comprobacions/getBancosValidos",
+      "handler": "operaciones-pago-movil-comprobacion.getBancosValidos",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-comprobacions",
+      "handler": "operaciones-pago-movil-comprobacion.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-comprobacions/count",
+      "handler": "operaciones-pago-movil-comprobacion.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movil-comprobacions/:id",
+      "handler": "operaciones-pago-movil-comprobacion.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movil-comprobacions",
+      "handler": "operaciones-pago-movil-comprobacion.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/operaciones-pago-movil-comprobacions/:id",
+      "handler": "operaciones-pago-movil-comprobacion.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/operaciones-pago-movil-comprobacions/:id",
+      "handler": "operaciones-pago-movil-comprobacion.delete",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/operaciones-pago-movil-comprobacions/generarDelete",
+      "handler": "operaciones-pago-movil-comprobacion.generarDelete",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    }
+  ]
+}

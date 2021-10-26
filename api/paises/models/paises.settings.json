@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "paises",
+  "info": {
+    "name": "paises",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nombre_del_pais": {
+      "type": "string"
+    },
+    "nombre_abreviacion": {
+      "type": "string"
+    },
+    "moneda": {
+      "type": "string"
+    },
+    "moneda_abreviacion": {
+      "type": "string"
+    }
+  }
+}

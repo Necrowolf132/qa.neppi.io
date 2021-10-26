@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "marca_blancas",
+  "info": {
+    "name": "marca blanca",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre_del_sistema": {
+      "type": "string"
+    },
+    "subdominio": {
+      "type": "string",
+      "regex": "^$|^[-a-zA-Z0-9@:%_\\+.~#?&//=]{2,256}\\.[a-z]{2,4}\\b(\\/[-a-zA-Z0-9@:%_\\+.~#?&//=]*)?$"
+    },
+    "imagen_logo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo",
+        "bloqueado"
+      ]
+    },
+    "fecha_de_creacion": {
+      "type": "datetime"
+    },
+    "canal_id": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "id_canal"
+    },
+    "email_monitor": {
+      "type": "email"
+    }
+  }
+}

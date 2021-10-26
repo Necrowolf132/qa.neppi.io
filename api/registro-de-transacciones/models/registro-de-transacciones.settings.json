@@ -1,0 +1,122 @@
+{
+  "kind": "collectionType",
+  "collectionName": "registro_de_transacciones",
+  "info": {
+    "name": "Registro_de_transacciones"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "descripcion": {
+      "type": "text"
+    },
+    "fecha_realizacion_transaccion": {
+      "type": "datetime"
+    },
+    "id_usuario": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "documento_identidad_comercio_asociado": {
+      "type": "string",
+      "required": true,
+      "regex": "^$|^[VvJjEeGg][0-9]{11,11}$"
+    },
+    "moneda_principal_transaccion": {
+      "type": "enumeration",
+      "enum": [
+        "BS",
+        "USD"  
+      ]
+    },
+    "status_comision": {
+      "type": "enumeration",
+      "enum": [
+        "cobrada",
+        "no_cobrada",
+        "rechazada"
+      ],
+      "default": "no_cobrada"
+    },
+    "descripcion_status_comision": {
+      "type": "text"
+    },
+    "id_producto_tipo": {
+      "model": "productos"
+    },    
+    "id_transaccion_del_producto": {
+      "columnType": "objectId",
+      "type": "string"
+    },
+    "monto_ganado_comision": {
+      "type": "decimal",
+      "private": false
+    },
+    "id_terminal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.terminales",
+      "campoInstanciaAsociada": [{"campo":"id_usuario", "campoTable":"id_user", "is_required":true},
+        {"campo":"id_producto_tipo", "campoTable":"id_producto_tipo", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir terminal asociado",
+      "customMainField": { "name": "nombre_del_terminal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_del_terminal",
+      "customTargetModel": "application::asociados-a-comercio.terminales",
+      "required": true
+    },
+    "id_sucursal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.sucursales",
+      "campoInstanciaAsociada": [{"campo":"id_usuario", "campoTable":"id_user", "is_required":true},
+        {"campo":"id_comercio", "campoTable":"id_comercial", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir sucursal asociada",
+      "customMainField": { "name": "nombre_de_la_sucursal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_de_la_sucursal",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "id_comercio": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "comercio",
+      "campoInstanciaAsociada": [{"campo":"id_usuario", "campoTable":"id_usuario", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir comercio asociado",
+      "customMainField": { "name": "razon_social", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "razon_social",
+      "customTargetModel": "application::comercio",
+      "required": true
+    },
+    "monto_transaccion_bs": {
+      "type": "decimal"
+    },
+    "monto_transaccion_usd": {
+      "type": "decimal"
+    },
+    "monto_comision": {
+      "type": "decimal"
+    },
+    "tipo_comision": {
+      "type": "enumeration",
+      "enum": [
+        "porcentual",
+        "monto_fijo"
+      ]
+    },
+    "total_comision_calculada": {
+      "type": "decimal"
+    },
+    "banco_aliado":  {
+      "model": "bancos"
+    }
+  }
+}

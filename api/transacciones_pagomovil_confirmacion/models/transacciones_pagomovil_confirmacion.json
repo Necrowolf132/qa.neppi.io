@@ -1,0 +1,159 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transacciones_pagomovil_confirmaciones",
+  "info": {
+    "name": "transacciones pago movil confirmaciones"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+
+    "ip": {
+      "type": "string",
+      "required": true,
+      "regex": "\\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\\b"
+    },
+
+    "nro_telefono_pagomovil_receptor": {
+      "type": "biginteger",
+      "required": true
+    },
+
+
+    "documento_identidad_pagomovil_receptor": {
+      "type": "string",
+      "required": true
+    },
+    "tasa_de_cambio_bs_por_dolar_transaccion": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "procesado",
+        "reversado",
+        "no_procesado",
+        "error"
+      ]
+    },
+    "tipo_operacion_pagomovil_confirmacion": {
+      "type": "enumeration",
+      "enum": [
+        "simple",
+        "multiple"
+      ]
+    },
+    "moneda_principal_transaccion": {
+      "type": "enumeration",
+      "enum": [
+        "BS",
+        "USD"  
+      ]
+    },
+    "monto_pagomovil_transaccion_usd": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "monto_pagomovil_transaccion_bs": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+
+    "banco_pagomovil_receptor": {
+      "type": "string",
+      "required": true
+    },
+    "fecha_confirmacion_operacion": {
+      "type": "datetime"
+    },    
+    "id_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "required": true
+    },
+    "id_terminal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.terminales",
+      "campoInstanciaAsociada": [{"campo":"id_user", "campoTable":"id_user", "is_required":true},
+        {"campo":"id_producto_tipo", "campoTable":"productos", "is_required":true, "is_array": true},{"campo":"id_sucursal", "campoTable":"id_sucursal", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir terminal asociado",
+      "customMainField": { "name": "nombre_del_terminal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_del_terminal",
+      "customTargetModel": "application::asociados-a-comercio.terminales",
+      "required": true
+    },
+    "id_sucursal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.sucursales",
+      "campoInstanciaAsociada": [{"campo":"id_user", "campoTable":"id_user", "is_required":true}, {"campo":"id_comercio", "campoTable":"id_comercio", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir sucursal asociada",
+      "customMainField": { "name": "nombre_de_la_sucursal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_de_la_sucursal",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "id_producto_tipo": {
+      "model": "productos"
+    },
+    "monto_comision": {
+      "type": "decimal",
+      "private": false,
+      "max": 100
+    },
+    "tipo_comision": {
+      "type": "enumeration",
+      "enum": [
+        "porcentual",
+        "monto_fijo"
+      ]
+    }, 
+    "codigo_de_api": {
+      "type": "string"
+    },
+    "mensaje_de_api": {
+      "type": "text"
+    },
+    "mensaje_de_estatus_interno": {
+      "type": "text"
+    },
+    "documento_identidad_comercio_asociado": {
+      "type": "string",
+      "required": true,
+      "regex": "^$|^[VvJjEeGg][0-9]{11,11}$"
+    },
+    "pagos_moviles_asociados_transaccion": {
+      "type": "component",
+      "repeatable": true,
+      "component": "transacciones-pagomovil-confirmaciones.transacciones-pagomovil-confirmaciones-multiples-pagos"
+    },
+    "id_comercio": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "comercio",
+      "campoInstanciaAsociada": [{"campo":"id_user", "campoTable":"id_usuario", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir comercio asociado",
+      "customMainField": { "name": "razon_social", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "razon_social",
+      "customTargetModel": "application::comercio",
+      "required": true
+    },
+    "banco_aliado":  {
+      "model": "bancos"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neppi-strapi-desarrollo-deploy
+  labels:
+    name: neppi-strapi-desarrollo-deploy
+    app: neppi-strapi-desarrollo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: neppi-strapi-desarrollo-pod
+      app: neppi-strapi-desarrollo-app
+  template:
+    metadata:
+      name: neppi-strapi-desarrollo-pod
+      labels:
+        name: neppi-strapi-desarrollo-pod
+        app: neppi-strapi-desarrollo-app
+    spec:
+      containers:
+        - name: neppi-strapi-desarrollo-container
+          image: "993905722383.dkr.ecr.us-east-2.amazonaws.com/neppi-strapi-docker-desarrollo:V0.1"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 2000Mi
+              cpu: "2"
+            requests:
+              memory: 1000Mi
+              cpu: "1"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 1337
+            initialDelaySeconds: 5
+            periodSeconds: 5

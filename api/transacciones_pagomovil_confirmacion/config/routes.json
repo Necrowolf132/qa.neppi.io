@@ -1,0 +1,60 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movils/validatepago",
+      "handler": "transacciones_pagomovil_confirmacion.validateSinglePago",
+      "config": {
+        "policies": ["is-token-validate"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movils",
+      "handler": "transacciones_pagomovil_confirmacion.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movils/count",
+      "handler": "transacciones_pagomovil_confirmacion.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/operaciones-pago-movils/:id",
+      "handler": "transacciones_pagomovil_confirmacion.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/operaciones-pago-movils",
+      "handler": "transacciones_pagomovil_confirmacion.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/operaciones-pago-movils/:id",
+      "handler": "transacciones_pagomovil_confirmacion.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/operaciones-pago-movils/:id",
+      "handler": "transacciones_pagomovil_confirmacion.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

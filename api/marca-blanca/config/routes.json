@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/marca-blancas",
+      "handler": "marca-blanca.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/marca-blancas/count",
+      "handler": "marca-blanca.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/marca-blancas/:id",
+      "handler": "marca-blanca.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/marca-blancas",
+      "handler": "marca-blanca.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/marca-blancas/:id",
+      "handler": "marca-blanca.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/marca-blancas/:id",
+      "handler": "marca-blanca.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

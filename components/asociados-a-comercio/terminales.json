@@ -1,0 +1,70 @@
+{
+  "collectionName": "terminales_component",
+  "info": {
+    "name": "terminales",
+    "icon": "chalkboard"
+  },
+  "options": {},
+  "attributes": {
+    "nombre_del_terminal": {
+      "type": "string"
+    },
+    "descripcion_del_terminal": {
+      "type": "string"
+    },
+    "tipo_de_terminal": {
+      "type": "enumeration",
+      "enum": [
+        "Boton_de_pago",
+        "terminal_de_cobro"
+      ]
+    },
+    "productos": {
+      "collection": "productos"
+    },
+    "id_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "id_sucursal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.sucursales",
+      "campoInstanciaAsociada": [{"campo":"id_usuario", "campoTable":"id_user", "is_required":true },
+        {"campo":"id", "campoTable":"id_comercio", "is_required":true}],
+      "placeholder":"añadir sucursal asociada",
+      "customMainField": { "name": "nombre_de_la_sucursal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_de_la_sucursal",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "generateToken": {
+      "type": "token",
+      "columnType": "string",
+      "required": true,
+      "nameLabel": "Generador de token",
+      "targetTable": "asociados-a-comercio.terminales",
+      "targetField": "generateToken"
+    },
+    "estatus_de_token": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo",
+        "bloqueado"
+      ]
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo",
+        "bloqueado"
+      ]
+    },
+    "banco_aliado":  {
+      "model": "bancos"
+    }
+  }
+}

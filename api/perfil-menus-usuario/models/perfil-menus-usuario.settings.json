@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "perfil_menu_usuarios",
+  "info": {
+    "name": "perfil menú usuario",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre_del_perfil": {
+      "type": "string"
+    },
+    "estatus_del_perfil": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo",
+        "bloqueado"
+      ]
+    },
+    "menus_permitidos": {
+      "collection": "modulos-y-menus"
+    },
+    "id_canal": {
+      "model": "marca-blanca"
+    },
+    "tipo_de_usuario": {
+      "type": "enumeration",
+      "enum": [
+        "administrador",
+        "canal",
+        "empresa",
+        "gerente",
+        "empleado",
+        "vendedor",
+        "sistema_interno_apipago"
+      ],
+      "default": "empresa",
+      "required": true
+    },
+    "permiso_de_creacion": {
+      "type": "boolean",
+      "default": false
+    },
+    "permiso_de_lectura": {
+      "type": "boolean",
+      "default": false
+    },
+    "permiso_de_actualizacion": {
+      "type": "boolean",
+      "default": false
+    },
+    "permiso_de_eliminacion": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

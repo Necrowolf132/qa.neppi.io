@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tasa_de_comisiones",
+  "info": {
+    "name": "tasa de comisiones",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre_de_comision": {
+      "type": "string"
+    },
+    "monto_valor_comision": {
+      "type": "decimal",
+      "private": false,
+      "max": 100
+    },
+    "tipo_comision": {
+      "type": "enumeration",
+      "enum": [
+        "porcentual",
+        "monto_fijo"
+      ]
+    },
+    "estatus_comision": {
+      "type": "enumeration",
+      "enum": [
+        "activo",
+        "inactivo"
+      ]
+    },
+    "monto_rango_inicio": {
+      "type": "decimal",
+      "private": false
+    },
+    "monto_rango_fin": {
+      "type": "decimal",
+      "private": false
+    }
+  }
+}

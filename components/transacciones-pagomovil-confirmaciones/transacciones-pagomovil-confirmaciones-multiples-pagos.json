@@ -1,0 +1,79 @@
+{
+  "collectionName": "transacciones_pagomovil_confirmaciones_multiples_pagos",
+  "info": {
+    "name": "transacciones_pagomovil_confirmaciones_multiples_pagos",
+    "icon": "address-card"
+  },
+  "options": {
+
+  },
+  "attributes": {
+    "transacciones_pagomovil_confirmaciones_id": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "transacciones_pagomovil_confirmacion",
+      "campoInstanciaAsociada": [],
+      "placeholder":"añadir transacciones  asociada",
+      "customMainField": { "name": "id", "schema": {"type": "uid"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "_id_string",
+      "customTargetModel": "application::transacciones_pagomovil_confirmacion.transacciones_pagomovil_confirmacion",
+      "required": true
+    },
+    "nro_telefono_pagomovil_emisor": {
+      "type": "biginteger"
+    },
+    "documento_identidad_pagomovil_emisor": {
+      "type": "string",
+      "required": true
+    },
+    "banco_pagomovil_emisor": {
+      "type": "string",
+      "required": true
+    },
+    "monto_pagomovil_transaccion_usd": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "monto_pagomovil_transaccion_bs": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "nro_referencia_pagomovil": {
+      "type": "biginteger",
+      "required": true
+    },
+    "fecha_realizacion_operacion": {
+      "type": "datetime",
+      "required": true,
+      "default": "0000-06-21T04:27:44.000Z"
+    },
+    "tasa_de_cambio_bs_por_dolar_transaccion": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "procesado",
+        "reversado",
+        "no_procesado",
+        "error"
+      ]
+    },
+    "moneda_principal_transaccion": {
+      "type": "enumeration",
+      "enum": [
+        "BS",
+        "USD"  
+      ]
+    },
+    "id_firma_pagomovil_confirmacion": {
+      "type": "biginteger",
+      "required": true
+    }
+  }
+}

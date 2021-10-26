@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/extraerData/oneWay",
+      "handler": "input-relation-component.index",
+      "config": {
+        "policies": ["AdminPoliceAccess"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/extraerDataInit",
+      "handler": "input-relation-component.setDataInputInit",
+      "config": {
+        "policies": ["AdminPoliceAccess"]
+      }
+    }
+  ]
+}
