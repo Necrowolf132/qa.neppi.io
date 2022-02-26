@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/controladores-frontend-pps",
+      "handler": "controladores-frontend-pp.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/controladores-frontend-pps/count",
+      "handler": "controladores-frontend-pp.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/controladores-frontend-pps/:id",
+      "handler": "controladores-frontend-pp.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/controladores-frontend-pps",
+      "handler": "controladores-frontend-pp.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/controladores-frontend-pps/:id",
+      "handler": "controladores-frontend-pp.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/controladores-frontend-pps/:id",
+      "handler": "controladores-frontend-pp.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -89,7 +89,7 @@ const validateRifEmpresaWhen = function(crear_user_comercio, schema) {
 }
 const validateEstatusEmpresaWhen = function(crear_user_comercio, schema){
     if(crear_user_comercio){
-        return schema.oneOf(strapi.config.get('sistemDefault.arrayEstatus1', []),"No es un valor valido para el campo 'estatus_comercio' ")
+        return schema.default(strapi.config.get('sistemDefault.defaultStatus', "")).oneOf(strapi.config.get('sistemDefault.arrayEstatus1', []),"No es un valor valido para el campo 'estatus' ")
     }
     return schema;
 
@@ -124,13 +124,15 @@ const CreateScheme = async() => {
 
         crear_user_comercio: yup.boolean({ message: "El campo 'crear_user_comercio' solo puede ser 'true' o 'false' "}),
 
+        confirmed: yup.boolean({ message: "El campo 'confirmed' solo puede ser 'true' o 'false' "}).default(strapi.config.get('sistemDefault.defaultConfirmed', "")),
+
         persona:  yup.string().when(["crear_user_comercio"],validatePersonaWhen),
 
         nombre_empresa:  yup.string().when(["crear_user_comercio"],validateNombreEmpresaWhen),
 
         rif_empresa:  yup.string().when(["crear_user_comercio"],validateRifEmpresaWhen),
 
-        estatus_comercio: yup.string().when(["crear_user_comercio"],validateEstatusEmpresaWhen),
+        estatus: yup.string().when(["crear_user_comercio"],validateEstatusEmpresaWhen),
 
         porcentaje_comision_canal_o_vendedor:  yup.number().transform(function (value, originalvalue) {
             return this.isType(value) && value !== null ? Math.round((value + Number.EPSILON) * 100) / 100 : value;

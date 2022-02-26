@@ -19,11 +19,22 @@
     },
     "perfil": {
       "columnType": "objectId",
-      "type":"relationall",
+      "type": "relationall",
       "model": "perfil-menus-usuario",
-      "campoInstanciaAsociada": [{"campo":"id_canal", "campoTable":"id_canal", "is_required":true }],
-      "placeholder":"Seleccione perfil de usuario",
-      "customMainField": { "name": "nombre_del_perfil", "schema": {"type": "string"}},
+      "campoInstanciaAsociada": [
+        {
+          "campo": "id_canal",
+          "campoTable": "id_canal",
+          "is_required": true
+        }
+      ],
+      "placeholder": "Seleccione perfil de usuario",
+      "customMainField": {
+        "name": "nombre_del_perfil",
+        "schema": {
+          "type": "string"
+        }
+      },
       "customRelationType": "oneWay",
       "campoDisplay": "nombre_del_perfil",
       "required": false
@@ -40,11 +51,11 @@
       "default": "Administrador_Backend",
       "required": true
     },
-    "fechas_envio_registro":{
+    "fechas_envio_registro": {
       "type": "datetime",
       "required": true
     },
-    "fechas_de_eliminacion":{
+    "fechas_de_eliminacion": {
       "type": "datetime"
     },
     "tipo_de_usuario": {
@@ -173,7 +184,7 @@
       "via": "related",
       "plugin": "upload"
     },
-    "img_selfie_documento_identidad":  {
+    "img_selfie_documento_identidad": {
       "model": "file",
       "via": "related",
       "plugin": "upload"
@@ -185,7 +196,7 @@
       "type": "boolean",
       "default": false
     },
-    "fecha_acept_boletin":{
+    "fecha_acept_boletin": {
       "type": "datetime"
     },
     "ip_acept_boletin": {
@@ -208,6 +219,11 @@
     },
     "puntaje_de_credito": {
       "type": "biginteger"
+    },
+    "scoring_crediticio": {
+      "type": "component",
+      "repeatable": false,
+      "component": "informacion-crediticia.usuario-scoring"
     }
   }
 }

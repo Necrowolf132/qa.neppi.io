@@ -1,0 +1,60 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/cuotas-de-pagos",
+      "handler": "cuotas-de-pagos.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cuotas-de-pagos/count",
+      "handler": "cuotas-de-pagos.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cuotas-de-pagos/:id",
+      "handler": "cuotas-de-pagos.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/cuotas-de-pagos",
+      "handler": "cuotas-de-pagos.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/cuotas-de-pagos/calcular-cuotas-neppi-bnpl",
+      "handler": "cuotas-de-pagos.NeppiBNPLCalcularCuota",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cuotas-de-pagos/:id",
+      "handler": "cuotas-de-pagos.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/cuotas-de-pagos/:id",
+      "handler": "cuotas-de-pagos.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

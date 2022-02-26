@@ -11,4 +11,36 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 1337 
+      targetPort: 1337
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: neppi-strapi-desarrollo-cluster-ip-ssh
+  labels:
+    name: neppi-strapi-desarrollo-deploy
+    app: neppi-strapi-desarrollo-app
+spec:
+  selector:
+    app: neppi-strapi-desarrollo-app
+  ports:
+    - protocol: TCP
+      port: 2220
+      targetPort: 2220
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apipago-desarrollo-cluster-ip-pay-neppi
+  labels:
+    name: neppi-strapi-desarrollo-deploy-pay-neppi
+    app: neppi-strapi-desarrollo-app
+spec:
+  selector:
+    app: neppi-strapi-desarrollo-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  neppi-strapi-desarrollo-deploy-pay-neppi
+  labels:
+    name:  neppi-strapi-desarrollo-deploy-pay-neppi
+    app: neppi-strapi-desarrollo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: neppi-strapi-desarrollo-pod-pay-neppi
+      app: neppi-strapi-desarrollo-app
+  template:
+    metadata:
+      name: neppi-strapi-desarrollo-pod-pay-neppi
+      labels:
+        name: neppi-strapi-desarrollo-pod-pay-neppi
+        app: neppi-strapi-desarrollo-app
+    spec:
+      containers:
+        - name: neppi-strapi-desarrollo-container-pay-neppi
+          image: "993905722383.dkr.ecr.us-east-2.amazonaws.com/pay-neppi-docker-desarrollo:V0.1"
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            

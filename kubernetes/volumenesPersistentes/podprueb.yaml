@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app1
+spec:
+  containers:
+  - name: app1
+    image: "993905722383.dkr.ecr.us-east-2.amazonaws.com/neppi-strapi-docker-desarrollo:V0.1"
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /data
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: neppi-api-folder-claim

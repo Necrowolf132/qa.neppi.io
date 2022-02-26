@@ -22,16 +22,25 @@ spec:
         - name: neppi-strapi-desarrollo-container
           image: "993905722383.dkr.ecr.us-east-2.amazonaws.com/neppi-strapi-docker-desarrollo:V0.1"
           imagePullPolicy: Always
-          resources:
-            limits:
-              memory: 2000Mi
-              cpu: "2"
-            requests:
-              memory: 1000Mi
-              cpu: "1"
+          volumeMounts:
+            - mountPath: "/home/node/app/api"
+              name: neppi-api-folder
+        #  resources:
+        #    limits:
+        #      memory: 2000Mi
+        #      cpu: "2"
+        #    requests:
+        #      memory: 1000Mi
+        #      cpu: "1"
           livenessProbe:
             httpGet:
               path: /
               port: 1337
             initialDelaySeconds: 5
             periodSeconds: 5
+      volumes:
+        - name: neppi-api-folder
+        # Este volumen EBS debe existir anteriormente.
+          persistentVolumeClaim:
+            claimName: neppi-api-folder-claim
+            

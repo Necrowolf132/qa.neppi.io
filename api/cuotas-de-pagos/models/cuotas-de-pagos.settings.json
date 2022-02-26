@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cuotas_de_pagos",
+  "info": {
+    "name": "cuotas de pagos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "cantidad_de_cuotas": {
+      "type": "integer"
+    },
+    "codigo_de_cuota": {
+      "type": "string"
+    },
+    "identificador": {
+      "type": "uid",
+      "targetField": "codigo_de_cuota"
+    },
+    "producto": {
+      "model": "productos"
+    },
+    "cantidad_porcentual_de_interes_por_cuota": {
+      "type": "decimal"
+    },
+    "cantidad_fija_de_interes_por_cuota": {
+      "type": "decimal"
+    },
+    "dias_para_pago_por_cuato": {
+      "type": "integer"
+    }
+  }
+}

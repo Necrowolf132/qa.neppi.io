@@ -25,6 +25,10 @@
     },
     "tasa_de_comision": {
       "model": "tasa-de-comisiones"
+    },
+    "name_controller": {
+      "type": "string",
+      "required": true
     }
   }
 }

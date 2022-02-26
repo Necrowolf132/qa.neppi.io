@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bnpls",
+  "info": {
+    "name": "BNPL",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "adquiriente_bnpl_id": {
+      "model": "bancos"
+    },
+    "data_operacion_origen": {
+      "type": "json"
+    },
+    "monto_compra_real": {
+      "type": "decimal"
+    },
+    "monto_completo_compra_cuotas": {
+      "type": "decimal"
+    },
+    "user_comprador_id": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "id_terminal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.terminales",
+      "campoInstanciaAsociada": [{"campo":"id_sucursal", "campoTable":"id_sucursal", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir terminal asociado",
+      "customMainField": { "name": "nombre_del_terminal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_del_terminal",
+      "customTargetModel": "application::asociados-a-comercio.terminales",
+      "required": true
+    },
+    "id_sucursal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.sucursales",
+      "campoInstanciaAsociada": [{"campo":"id_comercio", "campoTable":"id_comercio", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir sucursal asociada",
+      "customMainField": { "name": "nombre_de_la_sucursal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_de_la_sucursal",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "comercio_id": {
+      "model": "comercio"
+    },
+    "balance_por_pagar": {
+      "type": "decimal"
+    },
+    "tiene_interes": {
+      "type": "boolean"
+    },
+    "porcentaje_interes_completo": {
+      "type": "decimal"
+    },
+    "monto_utilidad_completo": {
+      "type": "decimal"
+    },
+    "fecha_realizacion_operacion": {
+      "type": "datetime"
+    },
+    "monto_utilidad_final_al_finalizar_bnpl": {
+      "type": "decimal"
+    },
+    "status_bnpl": {
+      "type": "enumeration",
+      "enum": [
+        "sin_pagar",
+        "pagado",
+        "cancelado",
+        "retrasado",
+        "al_dia"
+      ]
+    },
+    "producto_id": {
+      "model": "productos"
+    },
+    "pais": {
+      "model": "paises"
+    },
+    "cuotas_de_pago": {
+      "type": "component",
+      "repeatable": true,
+      "component": "transacciones-cuotas.cuotas-bnpl"
+    }
+  }
+}

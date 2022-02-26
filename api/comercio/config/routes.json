@@ -25,14 +25,6 @@
       }
     },
     {
-      "method": "POST",
-      "path": "/comercios/generateConcentID",
-      "handler": "comercio.generateConcentID",
-      "config": {
-        "policies": []
-      }
-    },
-    {
       "method": "GET",
       "path": "/comercios/:id",
       "handler": "comercio.findOne",

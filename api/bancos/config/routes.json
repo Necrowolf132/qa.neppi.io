@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/bancos/getBancosForCountry",
+      "handler": "bancos.getBancosForCountry",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/bancos/:id",
       "handler": "bancos.update",

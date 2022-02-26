@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_transacciones_cuotas_cuotas_bnpls",
+  "info": {
+    "name": "cuotas BNPL",
+    "icon": "calendar-check"
+  },
+  "options": {},
+  "attributes": {
+    "codigo_de_cuota": {
+      "type": "string"
+    },
+    "monto_a_pagar": {
+      "type": "decimal"
+    },
+    "estatus": {
+      "type": "enumeration",
+      "enum": [
+        "pagada_con_retraso",
+        "sin_pagar",
+        "pagada",
+        "cancelada"
+      ]
+    },
+    "fecha_estimada_de_pago": {
+      "type": "date"
+    },
+    "fecha_de_pago_real": {
+      "type": "date"
+    },
+    "usuario_acreedor": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "comercio_acreditador": {
+      "model": "comercio"
+    },
+    "proveedor_de_pago": {
+      "model": "bancos"
+    },
+    "monto_interes": {
+      "type": "decimal"
+    },
+    "porcentage_interes": {
+      "type": "decimal"
+    }
+  }
+}

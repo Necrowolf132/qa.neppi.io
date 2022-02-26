@@ -1,0 +1,118 @@
+--Crea politica para el EFS para que el cluster pueda administrar la misma
+
+curl -o iam-policy-example.json https://raw.githubusercontent.com/kubernetes-sigs/aws-efs-csi-driver/v1.3.2/docs/iam-policy-example.json
+
+aws iam create-policy \
+    --policy-name AmazonEKS_EFS_CSI_Driver_Policy \
+    --policy-document file://iam-policy-example.json
+
+
+--Cree un rol de IAM y asocie la política de IAM al rol. Agregue un comentario en la cuenta de servicio de Kubernetes con el ARN del rol de IAM y el rol de IAM con el nombre de cuenta de servicio de Kubernetes. Puede crear el rol mediante eksctl o AWS CLI.
+
+eksctl create iamserviceaccount \
+    --name efs-csi-controller-sa \
+    --namespace kube-system \
+    --cluster <cluster-name> \
+    --attach-policy-arn arn:aws:iam::<Account ID>:policy/AmazonEKS_EFS_CSI_Driver_Policy \
+    --approve \
+    --override-existing-serviceaccounts \
+    --region us-west-2
+
+--Instalar el controlador de Amazon EFS
+--Instale el controlador de CSI de Amazon EFS con Helm o un manifiesto.
+
+kubectl kustomize \
+    "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/ecr?ref=release-1.3" > driverCSIEFSAWS.yaml
+
+-- Edite el archivo y elimine las siguientes líneas que crean una cuenta de servicio de Kubernetes. Esto no es necesario porque la cuenta de servicio se creó en un paso anterior.
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/name: aws-efs-csi-driver
+  name: efs-csi-controller-sa
+  namespace: kube-system
+---
+
+-- Busque la siguiente línea. Si el clúster no está en la región us-west-2, reemplace la siguiente dirección por la dirección de su región. Una vez realizado el cambio, guarde el manifiesto modificado.
+
+image: 602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/aws-efs-csi-driver:v1.3.2
+--Aplique el manifiesto
+
+kubectl apply -f driverCSIEFSAWS.yaml
+
+-- Crear un sistema de archivos de Amazon EFS
+
+vpc_id=$(aws eks describe-cluster \
+    --name <cluster-name> \
+    --query "cluster.resourcesVpcConfig.vpcId" \
+    --output text)
+
+cidr_range=$(aws ec2 describe-vpcs \
+    --vpc-ids $vpc_id \
+    --query "Vpcs[].CidrBlock" \
+    --output text)
+
+--- Cree un grupo de seguridad con una regla de entrada que permita el tráfico NFS entrante para los puntos de montaje de Amazon EFS.
+
+security_group_id=$(aws ec2 create-security-group \
+    --group-name MyEfsSecurityGroup \
+    --description "My EFS security group" \
+    --vpc-id $vpc_id \
+    --output text)
+
+--- Cree una regla de entrada que permita el tráfico NFS entrante desde el CIDR para la VPC del clúster.
+
+aws ec2 authorize-security-group-ingress \
+    --group-id $security_group_id \
+    --protocol tcp \
+    --port 2049 \
+    --cidr $cidr_rang
+
+--- Cree un sistema de archivos de Amazon EFS para su clúster de Amazon EKS.
+
+file_system_id=$(aws efs create-file-system \
+    --region us-west-2 \
+    --performance-mode generalPurpose \
+    --query 'FileSystemId' \
+    --output text)
+
+--- TE METES EN EL ADMINISTARDOR DE AWS Y LE COLACAS EN LE APARTADO DE RED TODAS LAS ZONAS DE DISPONIBILIDAD QUE EXISTAN QUE COMPARTAS CON EL CLUSTER DE KUBERNET, ADEMAS LE COLOCAS LAS POLITICAS DE GRUPO DE SEGURIDAD QUE ACABA DE CREAR ANTERIORMENTE 
+
+--- ADEMAS GENERAS UN ENPOINT DE ACCESO QUE DESPUES UTILIZARAS JUNTO CON EL id DEL EFS QUE SE ACABA DE CREAR PARA MODIFICAR EL ARCHIVO DE "PersistentVolume.yml" EN LA SECCION 
+
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0c71cee4aa4ff18a3::fsap-0993055d8d5ab2f6d
+
+--- ESE EMPOINT DE ACCESO CON LA POLITICA 0775 EL USUARIO POSIX 1000 GRUPO POSIX 1000 Y RUTA DE RAIZ /HOME/NODE/APP/API 
+
+--- MUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYY IMPORTANTE -> NO OLVIDES EN ESTE CASO CONCRETO COPIAR EN POR MEDIO EL POT DE PRUEBA Y UTILIZANDO EL COMANDO (kubectl exec -ti pod/app1 -- bash) PARA ENTRAR EN EL TODO EL CONTENIDO DE LA CARPETA /HOME/NODE/APP/API A /DATA PARA QUE NO ALLA CONFLICTO A LA HORA DE HACER DEPLOY DE LOS PODS MODIFICADOS QUE PONTAN EL efs EN LA RUTA DE  /HOME/NODE/APP/API DE LA INSTRUCCION QUE VIENE A CONTINUACION
+
+--- APLICAS LOS ARCHIVOS DE MANIFIESTO QUE CORRESPONDEN AL STORAGECLASS AL PRESISTEMVOLUMEN AL PERSISTEMVOLUMENCLAIM Y AL DEPLOY MODIFICADO PARA QUE ACEPTE TODOS LOS PARAMETROS PARA MONTAR LE VOLUMEN PERSISTENTE 
+
+(      volumes:
+        - name: neppi-api-folder
+        # Este volumen EBS debe existir anteriormente.
+          persistentVolumeClaim:
+            claimName: neppi-api-folder-claim
+)
+
+y
+
+(
+          volumeMounts:
+            - mountPath: "/home/node/app/api"
+              name: neppi-api-folder
+)
+
+---------------------------------------------------------------- adicional ------------------------------------------------------------
+
+-- comando para conextarse a los contenedores
+
+kubectl exec -ti pod/neppi-strapi-desarrollo-deploy-d5555f6bd-s88nn -- bash
+
+-- comando para 
+
+kubectl port-forward pods/mongo-75f59d57f4-4nd6q 28015:27017

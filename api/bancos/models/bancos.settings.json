@@ -69,6 +69,19 @@
     "banco_aliado": {
       "type": "boolean",
       "default": false
+    },
+    "productos": {
+      "collection": "productos"
+    },
+    "imagenlogo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }

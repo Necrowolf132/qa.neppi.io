@@ -11,6 +11,9 @@ spec:
   - hosts:
     - qa.neppi.io
     secretName: tls-secret-neppidesarrollo
+  - hosts:
+    - qapay.neppi.io
+    secretName: tls-secret-neppidesarrollo
   rules:
   - host: qa.neppi.io
     http:
@@ -18,4 +21,18 @@ spec:
         - path: /
           backend:
             serviceName: neppi-strapi-desarrollo-cluster-ip
+            servicePort: 80
+  - host: qapay.neppi.io
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: apipago-desarrollo-cluster-ip-pay-neppi
+            servicePort: 80
+  - host: www.qapay.neppi.io
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: apipago-desarrollo-cluster-ip-pay-neppi
             servicePort: 80

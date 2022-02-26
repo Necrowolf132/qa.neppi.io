@@ -117,6 +117,9 @@
     },
     "banco_aliado":  {
       "model": "bancos"
+    },
+    "JsonFactura":{
+      "type": "json"
     }
   }
 }

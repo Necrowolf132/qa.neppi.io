@@ -26,7 +26,9 @@ module.exports = ({ env }) => ({
     arrayEstatus1: [ "activo", "inactivo", "bloqueado"],
     CLIENT_SECRET_CIBC: "pbHXuCTaLDNyx1C7fidHByqZYcm73bH10LonwCgDEa0=",
     CLIENT_ID_CIBC: "G8ObsizNsxH4BDbH5xdezSUgCH6y1sOczf-D4rfYJco=",
-    regexDefaultTokenComercio: /\b[0-9A-Za-z]{8,8}-[0-9A-Za-z]{4,4}-[0-9A-Za-z]{4,4}-[0-9A-Za-z]{4,4}-[0-9A-Za-z]{12,12}\b/
+    regexDefaultTokenComercio: /\b[0-9A-Za-z]{8,8}-[0-9A-Za-z]{4,4}-[0-9A-Za-z]{4,4}-[0-9A-Za-z]{4,4}-[0-9A-Za-z]{12,12}\b/,
+    defaultStatus: "activo",
+    defaultConfirmed: false
 
 });
   

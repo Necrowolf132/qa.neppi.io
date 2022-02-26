@@ -1,0 +1,84 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bnpls",
+      "handler": "bnpl.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/bnpls/count",
+      "handler": "bnpl.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/bnpls/:id",
+      "handler": "bnpl.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bnpls",
+      "handler": "bnpl.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bnpls/CIBC/generateConcentID",
+      "handler": "bnpl.CIBCgenerateConcentID",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bnpls/CIBC/confirmacionOperation",
+      "handler": "bnpl.CIBCconfirmacionOperation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bnpls/CIBC/verificarEstado",
+      "handler": "bnpl.CIBCverificarEstado",
+      "config": {
+        "policies": ["ExtraerTasaComocionIDproducto"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bnpls/NEPPI/SaveNeppiBnpl",
+      "handler": "bnpl.SaveNeppiBnpl",
+      "config": {
+        "policies": ["ExtraerTasaComocionIDproducto"]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/bnpls/:id",
+      "handler": "bnpl.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/bnpls/:id",
+      "handler": "bnpl.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

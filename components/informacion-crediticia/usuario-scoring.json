@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_informacion_crediticia_usuario_scorings",
+  "info": {
+    "name": "usuario scoring",
+    "icon": "calculator"
+  },
+  "options": {},
+  "attributes": {
+    "paise": {
+      "model": "paises"
+    },
+    "limites_moneda_principal": {
+      "type": "decimal"
+    },
+    "limites_moneda_dolares": {
+      "type": "decimal"
+    }
+  }
+}

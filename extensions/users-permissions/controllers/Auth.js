@@ -32,39 +32,62 @@ const generatePassword = () => {
     }
     return retVal;
 }
-const getJWTCIBC = async() => {
-  try {
-    const data = qs.stringify({
-      'grant_type': 'client_credentials',
-      'client_id': strapi.config.get('sistemDefault.CLIENT_ID_CIBC', ""),
-      'client_secret': strapi.config.get('sistemDefault.CLIENT_SECRET_CIBC', ""),
-      'scope': 'payments' 
-    });
-    const config = {
-      method: 'post',
-      url: 'https://api.cibc.useinfinite.io/token',
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data : data
-    };
-    
-   const response = await  axios(config);
 
-    if(response?.data?.access_token){
-      return response?.data?.access_token
-    } else {
-      return ""
-    }
-
-} catch(error)  {
-  console.log(error);
-  return ""
-}
-}
 
 
 module.exports = {
+  async getJWTCIBC() {
+    try {
+      const data = qs.stringify({
+        'grant_type': 'client_credentials',
+        'client_id': strapi.config.get('sistemDefault.CLIENT_ID_CIBC', ""),
+        'client_secret': strapi.config.get('sistemDefault.CLIENT_SECRET_CIBC', ""),
+        'scope': 'payments' 
+      });
+      const config = {
+        method: 'post',
+        url: 'https://api.cibc.useinfinite.io/token',
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data : data
+      };
+      
+     const response = await  axios(config);
+  
+      if(response?.data?.access_token){
+        return {access_token: response?.data?.access_token, status:"Success"}
+      } else {
+        return {access_token:"", status:"Error"}
+      }
+  
+  } catch(error)  {
+    console.log(error);
+    return {access_token:"", status:"Error"}
+  }
+  },
+  async refreshToken(ctx) {
+
+    const params = _.assign(ctx.request.body);
+    // Parse Token
+    try {
+      const { id } = await strapi.plugins['users-permissions'].services.jwt.verify(params.jwt);
+      const user = await strapi.query('user', 'users-permissions').findOne({ id });
+      if(user?.id){
+        ctx.send({
+          jwt: strapi.plugins['users-permissions'].services.jwt.issue({
+            id: user.id,
+          }),
+          user
+        })
+      } else {
+        ctx.badRequest(null, 'Usuario ya no existe');
+      }
+    } catch (e) {
+      return ctx.badRequest(null, 'Invalid token');
+    }
+
+  },
   async callback(ctx) {
     const provider = ctx.params.provider || 'local';
     const params = ctx.request.body;
@@ -175,12 +198,10 @@ module.exports = {
           })
         );
       } else {
-        const jwtCIBC = await getJWTCIBC();
         ctx.send({
           jwt: strapi.plugins['users-permissions'].services.jwt.issue({
             id: user.id,
           }),
-          jwtCIBC,
           user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
             model: strapi.query('user', 'users-permissions').model,
           }),
@@ -212,12 +233,11 @@ module.exports = {
       if (!user) {
         return ctx.badRequest(null, error === 'array' ? error[0] : error);
       }
-      const jwtCIBC = await getJWTCIBC();
+
       ctx.send({
         jwt: strapi.plugins['users-permissions'].services.jwt.issue({
           id: user.id,
         }),
-        jwtCIBC,
         user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
           model: strapi.query('user', 'users-permissions').model,
         }),
@@ -227,6 +247,7 @@ module.exports = {
 
 
   async register(ctx) {
+    let registro = true
     let data, files, passwordGenerado = undefined
     const pluginStore = await strapi.store({
       environment: '',
@@ -255,7 +276,7 @@ module.exports = {
     }
 
     var params = {
-      ..._.omit(data, ['confirmed', 'confirmationToken', 'resetPasswordToken']),
+      ..._.omit(data, [ 'confirmationToken', 'resetPasswordToken']),
       provider: 'local',
     };
 
@@ -273,6 +294,7 @@ module.exports = {
       const validations = await schemaValidateResgisterUser.validate(params,{abortEarly:false});
       params = {...params, ...validations}
     } catch (error) {
+      registro = false
       console.log(error)
       console.log(error.errors) 
       return ctx.badRequest(
@@ -313,6 +335,7 @@ module.exports = {
     // Throw an error if the password selected by the user
     // contains more than three times the symbol '$'.
     if (strapi.plugins['users-permissions'].services.user.isHashed(params?.password)) {
+      registro = false
       return ctx.badRequest(
         null,
         {
@@ -326,6 +349,7 @@ module.exports = {
       .findOne({ type: settings.default_role }, []);
 
     if (!role) {
+      registro = false
       return ctx.badRequest(
         null,
         {
@@ -342,6 +366,7 @@ module.exports = {
       email: params.email,
     });
     if (user && user.provider === params.provider) {
+      registro = false
       return ctx.badRequest(
         null,
         {
@@ -351,6 +376,7 @@ module.exports = {
     }
 
     if (user && user.provider !== params.provider && settings.unique_email) {
+      registro = false
       return ctx.badRequest(
         null,
         {
@@ -360,10 +386,7 @@ module.exports = {
     }
 
     try {
-      if (!settings.email_confirmation) {
-        params.confirmed = true;
-      }
-
+      if(registro){
       const user = await strapi.query('user', 'users-permissions').create(params);
       if(user?.id && params?.crear_user_comercio === true && typeof strapi.query('comercio').create == 'function') {
             var newComercial = await strapi.query('comercio').create({
@@ -372,7 +395,8 @@ module.exports = {
             numero_de_documento_de_identificaion_fiscal: params?.persona?.trim().toUpperCase() + padStart(params?.rif_empresa?.toString()?.trim(), 11, "0"),
             telefono_celular_empresa: params?.telefono?.trim(),
             correo_de_la_empresa: params?.email?.trim(),
-            pais: strapi.config.get('sistemDefault.paispordefecto', "")
+            pais: strapi.config.get('sistemDefault.paispordefecto', ""),
+            estatus: params?.estatus?.trim()
           })
       }
       const sanitizedUser = sanitizeEntity(user, {
@@ -380,7 +404,7 @@ module.exports = {
       });
       if(files){
         if (Object.keys(files).length > 0) {
-          const arrayFiles = [];
+          const arrayFiles = [];  
           Object.keys(files).forEach(async (filename) => {
             await strapi.plugins.upload.services.upload.uploadToEntity(
               {
@@ -408,11 +432,11 @@ module.exports = {
       const comercioAsociado = newComercial ? newComercial : undefined
       return ctx.send({
         jwt,
-        jwtCIBC,
-        user: sanitizedUser,
+        user: sanitizedUser,  
         passwordGenerado,
         comercioAsociado
       });
+      }
     } catch (err) {
       console.log(err)
       const adminError = _.includes(err.message, 'username')

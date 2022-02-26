@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "controladores_frontend_pps",
+  "info": {
+    "name": "controladores frontend PP"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Nombre_controlador": {
+      "type": "string"
+    },
+    "codigo_controlador": {
+      "type": "uid",
+      "targetField": "Nombre_controlador"
+    },
+    "banco": {
+      "model": "bancos"
+    }
+  }
+}

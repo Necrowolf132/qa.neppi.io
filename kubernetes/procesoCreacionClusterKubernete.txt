@@ -1,6 +1,7 @@
 ## Vincular Register de contenedores de Docker de AWS con cliente de terminal docker despues de haber creado el registro correspondiente al contenedor que se subira directamente en la consola de aws  
 
-aws ecr get-login-password --profile Apipago --region us-east-1 | docker login --username AWS --password-stdin 010567305401.dkr.ecr.us-east-1.amazonaws.com/cluster-desarrollo
+aws ecr get-login-password --profile neppi --region us-east-2 | docker login --username AWS --password-stdin 993905722383.dkr.ecr.us-east-2.amazonaws.com
+
 
 ## Build y push de imagen actualizada de de docker a partir de Dockerfile correspondiente y subir a repositorio de AWS container 
 
@@ -18,6 +19,7 @@ https://www.youtube.com/watch?v=wQKEHmFLRGc&ab_channel=EnjoyableProgramming
 aws eks --profile Apipago --region us-east-1 update-kubeconfig --name <nombre del cluster pelado creado en aws>
 
 ## Comprobar que se conecto el cluster efectivamente 
+
 
 kubectl get all 
 

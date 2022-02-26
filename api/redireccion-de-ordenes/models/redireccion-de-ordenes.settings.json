@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "redireccion_de_ordenes_s",
+  "info": {
+    "name": "redireccion de ordenes ",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "banco": {
+      "model": "bancos"
+    },
+    "producto": {
+      "model": "productos"
+    },
+    "generalData": {
+      "type": "json"
+    },
+    "monto": {
+      "type": "decimal"
+    },
+    "utilizada": {
+      "type": "boolean"
+    },
+    "url_rediceccion_comercio": {
+      "type": "text"
+    },
+    "data_original_encriptada": {
+      "type": "json"
+    },
+    "usuario": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "id_terminal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.terminales",
+      "campoInstanciaAsociada": [{"campo":"id_sucursal", "campoTable":"id_sucursal", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir terminal asociado",
+      "customMainField": { "name": "nombre_del_terminal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_del_terminal",
+      "customTargetModel": "application::asociados-a-comercio.terminales",
+      "required": true
+    },
+    "id_sucursal": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "asociados-a-comercio.sucursales",
+      "campoInstanciaAsociada": [{"campo":"id_comercio", "campoTable":"id_comercio", "is_required":true}],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir sucursal asociada",
+      "customMainField": { "name": "nombre_de_la_sucursal", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "nombre_de_la_sucursal",
+      "customTargetModel": "application::asociados-a-comercio.sucursales",
+      "required": true
+    },
+    "id_comercio": {
+      "columnType": "objectId",
+      "type":"relationall",
+      "model": "comercio",
+      "campoInstanciaAsociada": [],
+      "campoInstanciaAsociadaRequiere": true,
+      "placeholder":"añadir comercio asociado",
+      "customMainField": { "name": "razon_social", "schema": {"type": "string"}},
+      "customRelationType": "oneWay",
+      "campoDisplay": "razon_social",
+      "customTargetModel": "application::comercio",
+      "required": true
+    }
+  }
+}

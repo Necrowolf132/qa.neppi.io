@@ -36,6 +36,8 @@ module.exports = {
             objetoEscritura.tipo_comision = result?.tipo_comision
             objetoEscritura.total_comision_calculada = montoTotalComision
             objetoEscritura.status_comision = result?.status_comision ? result.status_comision : "no_cobrada"
+            objetoEscritura.JsonFactura = result?.JsonFactura ? result?.JsonFactura : JSON.stringify({})  
+
             try {
                 const result = await strapi.query("registro-de-transacciones").model.create(objetoEscritura)
                 return result
